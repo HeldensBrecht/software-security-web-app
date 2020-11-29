@@ -6,12 +6,11 @@ export default function Profile(props) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    console.log(props);
     props.auth.getProfile((profile, err) => {
       setProfile(profile);
       setError(err);
     });
-  }, [props]);
+  }, [props.auth]);
 
   // const loadUserProfile = () => {
   //   console.log(props);
