@@ -18,7 +18,6 @@ function App(props) {
           <Route path="/about" component={AboutPage} />
           <Route
             path="/profile"
-            component={Profile}
             render={(props) => <Profile auth={auth} {...props} />}
           />
           <Route
