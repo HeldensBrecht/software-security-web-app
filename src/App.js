@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch } from "react-router-dom";
 
-function App() {
+import Header from "./common/Header";
+import Homepage from "./pages/Homepage";
+import AboutPage from "./pages/AboutPage";
+import Profile from "./pages/Profile";
+import Callback from "./auth/Callback";
+import Auth from "./auth/Auth";
+
+function App(props) {
+  const auth = new Auth(props.history);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header auth={auth} />
+      <div className="container-fluid">
+        <Switch>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/about" component={AboutPage} />
+          <Route
+            path="/profile"
+            component={Profile}
+            render={(props) => <Profile auth={auth} {...props} />}
+          />
+          <Route
+            path="/callback"
+            render={(props) => <Callback auth={auth} {...props} />}
+          />
+        </Switch>
+      </div>
+    </>
   );
 }
 
