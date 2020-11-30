@@ -10,7 +10,7 @@ export default function Profile(props) {
       setProfile(profile);
       setError(err);
     });
-  }, [props.auth]);
+  }, [props]);
 
   // const loadUserProfile = () => {
   //   console.log(props);
@@ -19,11 +19,38 @@ export default function Profile(props) {
   //     setError(err);
   //   });
   // };
+  console.log(profile);
 
   return (
-    <>
-      <h2>Profile</h2>
-      {profile ? <p>{profile.nickname}</p> : <h3>Loading...</h3>}
-    </>
+    <main className="container-fluid">
+      <div className="my-md-5" style={{ height: "5rem" }}></div>
+      <h3 className="mx-md-3 mb-md-3 font-weight-normal">Profile</h3>
+      <div className="mx-md-3">
+        {profile ? (
+          <table>
+            <tbody>
+              <tr>
+                <td>First Name</td>
+                <td>{profile.given_name}</td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>{profile.family_name}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{profile.email}</td>
+              </tr>
+              <tr>
+                <td>Email Verified</td>
+                <td>{profile.email_verified ? <>&check;</> : "&cross;"}</td>
+              </tr>
+            </tbody>
+          </table>
+        ) : (
+          <h3>Loading...</h3>
+        )}
+      </div>
+    </main>
   );
 }
