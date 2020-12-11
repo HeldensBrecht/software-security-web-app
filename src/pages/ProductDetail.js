@@ -54,12 +54,11 @@ const ProductDetail = (props) => {
         <>
           <div className="my-md-5" style={{ height: "5rem" }}></div>
           <div className="row mx-0">
-            <div className="col-xs-12 col-sm-12 col-md-7">
+            <div className="col-xs-12 pl-0 col-sm-12 col-md-7">
               <div className="row mx-0">
                 {product.images.map((i, index) => (
                   <>
-                    {/* {index % 3 === 0 && (</div><div className="row mx-0">)} */}
-                    <div key={index} className="col-md-6">
+                    <div key={index} className="col-md-6 px-1">
                       <img
                         src={`/images/${i.image}`}
                         alt=""
@@ -76,7 +75,7 @@ const ProductDetail = (props) => {
               </h4>
               <h6 className="text-muted mt-3">&euro;{product.price}</h6>
               <p className="mt-2 mt-sm-5 mr-md-5">{product.description}</p>
-              <button>Add to cart</button>
+              {/* <button>Add to cart</button> */}
             </div>
           </div>
         </>
