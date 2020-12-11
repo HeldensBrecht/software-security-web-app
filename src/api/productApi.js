@@ -25,7 +25,7 @@ export function getProducts(params) {
     .then(handleResponse)
     .catch(handleError);
 }
-
+//
 export async function getProduct(id) {
   return await fetch(baseUrl + "/" + id)
     .then(handleResponse)
