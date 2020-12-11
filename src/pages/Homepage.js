@@ -1,13 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   return (
-    // <div className="position-relative m-md-3 p-md-5" style={{backgroundImage: "url('/images/bg.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
-    //   <div className="col-md-5 mx-auto my-5 p-lg-5">
-    //     <h1 className="display-4 font-weight-normal">Homepage</h1>
-    //     <p className="lead font-weight-normal">Paragraph.</p>
-    //   </div>
-    // </div>
     <>
       <div
         className="cover-container d-flex h-100 p-3 mx-auto flex-column"
@@ -21,18 +16,11 @@ export default function Homepage() {
 
       <main className="container-fluid">
         <div className="d-md-flex flex-md-equal w-100 mt-4 mt-md-5 mb-md-3 py-md-5 px-md-3">
-          {/* <div className="mr-md-5 my-3 my-md-0 w-100">
-            <img
-              className="card-img-top rounded-0"
-              src="/images/fenton-square.png"
-              alt="Fenton lp player"
-            />
-            <p className="card-subtitle mt-sm-3 text-uppercase">
-              Vinyl Players
-            </p>
-            <p className="card-text text-muted">Browse all music players</p>
-          </div> */}
-          <div className="mr-md-5 my-3 my-md-0 w-100">
+          <Link
+            to="/about"
+            className="mr-md-5 my-3 my-md-0 w-100 text-decoration-none"
+            style={{ color: "inherit" }}
+          >
             <img
               className="card-img-top rounded-0"
               src="/images/craft-black-white-square1.jpg"
@@ -42,9 +30,13 @@ export default function Homepage() {
               How it's made
             </p>
             <p className="card-text text-muted">Authentic craftsmanship</p>
-          </div>
+          </Link>
           <div style={{ width: "35%" }}></div>
-          <div className="mx-md-5 my-3 my-md-0 w-100">
+          <Link
+            to="/products/vinyl"
+            className="mx-md-5 my-3 my-md-0 w-100 text-decoration-none"
+            style={{ color: "inherit" }}
+          >
             <img
               className="card-img-top rounded-0"
               src="/images/holding-album-square.jpg"
@@ -54,9 +46,13 @@ export default function Homepage() {
             <p className="card-text text-muted">
               Wide selection for young and old
             </p>
-          </div>
+          </Link>
           <div style={{ width: "35%" }}></div>
-          <div className="ml-md-5 my-3 my-md-0 w-100">
+          <Link
+            to="/products/apparel"
+            className="ml-md-5 my-3 my-md-0 w-100 text-decoration-none"
+            style={{ color: "inherit" }}
+          >
             <img
               className="card-img-top rounded-0"
               src="/images/girls-sweatshirt-square.jpg"
@@ -68,7 +64,7 @@ export default function Homepage() {
             <p className="card-text text-muted">
               Find your favourite artist's merch
             </p>
-          </div>
+          </Link>
           <div style={{ width: "35%" }}></div>
         </div>
 

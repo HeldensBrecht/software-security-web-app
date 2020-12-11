@@ -31,14 +31,14 @@ const ProductPage = (props) => {
           ? category.charAt(0).toUpperCase() + category.slice(1)
           : "Products"}
       </h3>
-      <div className="d-md-flex flex-md-equal w-100 mt-4 mt-md-0 mb-md-3 px-md-3">
+      <div className="row mx-0 mt-4 mt-md-0 mb-md-3">
         {products ? (
           products.map((p, i) => {
             return (
               <Link
                 key={p.id}
                 to={`/product/${p.id}`}
-                className="mr-md-3 my-3 my-md-0 w-100 text-decoration-none"
+                className="col-md-3 px-md-2 mb-4 w-100 text-decoration-none"
                 style={{ color: "inherit" }}
               >
                 <img

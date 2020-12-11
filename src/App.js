@@ -1,16 +1,18 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
 import { createBrowserHistory } from "history";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Homepage from "./pages/Homepage";
 import ProductPage from "./pages/ProductPage";
-import VinylPage from "./pages/VinylPage";
-import ApparelPage from "./pages/ApparelPage";
 import ProductDetail from "./pages/ProductDetail";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
+import AdminPanel from "./pages/AdminPanel";
+import ManageProductPage from "./pages/ManageProductPage";
 
 export const history = createBrowserHistory();
 
@@ -39,25 +41,18 @@ function App(props) {
         <Switch>
           <Route path="/" exact component={Homepage} />
           <Route path="/about" component={AboutPage} />
-          <Route path="/vinyl" component={VinylPage} />
-          <Route path="/apparel" component={ApparelPage} />
           <Route path="/products/:category" component={ProductPage} />
           <Route path="/products" component={ProductPage} />
-          {/* <Route
-            path="/products/vinyl"
-            render={(props) => <ProductPage category="vinyl" {...props} />}
-          />
-          <Route
-            path="/products/apparel"
-            render={(props) => <ProductPage category="apparel" {...props} />}
-          /> */}
-          {/* <Route
-            path="/apparel"
-            render={(props) => <ApparelPage auth={auth} {...props} />}
-          /> */}
           <Route path="/product/:id" component={ProductDetail} />
           <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute
+            path="/admin/product/:id"
+            component={ManageProductPage}
+          />
+          <ProtectedRoute path="/admin/product" component={ManageProductPage} />
+          <ProtectedRoute path="/admin" component={AdminPanel} />
         </Switch>
+        <ToastContainer autoClose={3000} hideProgressBar />
         {/* </div> */}
         <Footer />
       </Router>
