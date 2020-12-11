@@ -43,18 +43,6 @@ function App(props) {
           <Route path="/apparel" component={ApparelPage} />
           <Route path="/products/:category" component={ProductPage} />
           <Route path="/products" component={ProductPage} />
-          {/* <Route
-            path="/products/vinyl"
-            render={(props) => <ProductPage category="vinyl" {...props} />}
-          />
-          <Route
-            path="/products/apparel"
-            render={(props) => <ProductPage category="apparel" {...props} />}
-          /> */}
-          {/* <Route
-            path="/apparel"
-            render={(props) => <ApparelPage auth={auth} {...props} />}
-          /> */}
           <Route path="/product/:id" component={ProductDetail} />
           <ProtectedRoute path="/profile" component={Profile} />
         </Switch>

@@ -15,11 +15,11 @@ const Header = (props) => {
       </NavLink>
       <div className="collapse navbar-collapse" id="navbarContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink to="/" className="nav-link" activeClassName="not">
-              Black Friday
+              Products
             </NavLink>
-          </li>
+          </li> */}
           <li className="nav-item">
             <NavLink
               to="/products/vinyl"
