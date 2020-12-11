@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const Header = ({ auth }) => {
+const Header = (props) => {
+  const { isLoading, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   //   const activeStyle = { color: "white", backgroundColor: "black" };
   return (
     <nav
@@ -20,7 +22,7 @@ const Header = ({ auth }) => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/vinyl"
+              to="/products/vinyl"
               exact
               className="nav-link"
               activeClassName="active"
@@ -30,7 +32,7 @@ const Header = ({ auth }) => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/apparel"
+              to="/products/apparel"
               exact
               className="nav-link"
               activeClassName="active"
@@ -51,7 +53,7 @@ const Header = ({ auth }) => {
         </ul>
 
         <ul className="navbar-nav ml-auto">
-          {auth.isAuthenticated() && (
+          {(isLoading || isAuthenticated) && (
             <li className="nav-item">
               <NavLink
                 to="/profile"
@@ -65,11 +67,15 @@ const Header = ({ auth }) => {
           )}
           <li className="nav-item">
             <button
-              onClick={auth.isAuthenticated() ? auth.logout : auth.login}
+              onClick={
+                isLoading || isAuthenticated
+                  ? () => logout()
+                  : () => loginWithRedirect()
+              }
               style={{ backgroundColor: "inherit", border: "inherit" }}
               className="nav-link"
             >
-              {auth.isAuthenticated() ? "Log Out" : "My Account"}
+              {isLoading || isAuthenticated ? "Log Out" : "My Account"}
             </button>
           </li>
         </ul>

@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function Profile(props) {
+export default function Profile() {
+  const { user, isLoading } = useAuth0();
   const [profile, setProfile] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
 
   useEffect(() => {
-    props.auth.getProfile((profile, err) => {
-      setProfile(profile);
-      setError(err);
-    });
-  }, [props]);
+    setProfile(user);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
-  // const loadUserProfile = () => {
-  //   console.log(props);
-  //   props.auth.getProfile((profile, err) => {
-  //     setProfile(profile);
-  //     setError(err);
-  //   });
-  // };
   console.log(profile);
 
   return (
@@ -43,7 +36,11 @@ export default function Profile(props) {
               </tr>
               <tr>
                 <td>Email Verified</td>
-                <td>{profile.email_verified ? <>&check;</> : "&cross;"}</td>
+                <td>
+                  {profile.email_verified
+                    ? String.fromCharCode("0x00002714")
+                    : String.fromCharCode("0x00002718")}
+                </td>
               </tr>
             </tbody>
           </table>

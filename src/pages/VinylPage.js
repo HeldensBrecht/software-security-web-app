@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function VinylPage() {
   return (
@@ -8,7 +9,11 @@ export default function VinylPage() {
         Vinyl &amp; Vinyl Players
       </h3>
       <div className="d-md-flex flex-md-equal w-100 mt-4 mt-md-0 mb-md-3 px-md-3">
-        <div className="mr-md-3 my-3 my-md-0 w-100">
+        <Link
+          to="/product/:slug"
+          className="mr-md-3 my-3 my-md-0 w-100 text-decoration-none"
+          style={{ color: "inherit" }}
+        >
           <img
             className="card-img-top rounded-0"
             src="/images/holding-album-square.jpg"
@@ -18,7 +23,7 @@ export default function VinylPage() {
             Fenton Vinyl Player
           </p>
           <p className="card-text text-muted">€169.99</p>
-        </div>
+        </Link>
         <div className="mx-md-3 my-3 my-md-0 w-100">
           <img
             className="card-img-top rounded-0"

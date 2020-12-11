@@ -1,44 +1,67 @@
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
+import { createBrowserHistory } from "history";
 
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Homepage from "./pages/Homepage";
+import ProductPage from "./pages/ProductPage";
 import VinylPage from "./pages/VinylPage";
 import ApparelPage from "./pages/ApparelPage";
+import ProductDetail from "./pages/ProductDetail";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
-import Callback from "./auth/Callback";
-import Auth from "./auth/Auth";
+
+export const history = createBrowserHistory();
+
+const ProtectedRoute = ({ component, ...args }) => (
+  <Route component={withAuthenticationRequired(component)} {...args} />
+);
+
+const onRedirectCallback = (appState) => {
+  // Use the router's history module to replace the url
+  history.replace(appState?.returnTo || window.location.pathname);
+};
 
 function App(props) {
-  const auth = new Auth(props.history);
   return (
-    <>
-      <Header auth={auth} />
-      {/* <div className="container-fluid"> */}
-      <Switch>
-        <Route path="/" exact component={Homepage} />
-        <Route path="/about" component={AboutPage} />
-        <Route
-          path="/vinyl"
-          render={(props) => <VinylPage auth={auth} {...props} />}
-        />
-        <Route
-          path="/apparel"
-          render={(props) => <ApparelPage auth={auth} {...props} />}
-        />
-        <Route
-          path="/profile"
-          render={(props) => <Profile auth={auth} {...props} />}
-        />
-        <Route
-          path="/callback"
-          render={(props) => <Callback auth={auth} {...props} />}
-        />
-      </Switch>
-      {/* </div> */}
-      <Footer />
-    </>
+    <Auth0Provider
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      redirectUri={process.env.REACT_APP_AUTH0_CALLBACK_URL}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
+      scope="openid profile email"
+      onRedirectCallback={onRedirectCallback}
+    >
+      <Router history={history}>
+        <Header />
+        {/* <div className="container-fluid"> */}
+        <Switch>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/vinyl" component={VinylPage} />
+          <Route path="/apparel" component={ApparelPage} />
+          <Route path="/products/:category" component={ProductPage} />
+          <Route path="/products" component={ProductPage} />
+          {/* <Route
+            path="/products/vinyl"
+            render={(props) => <ProductPage category="vinyl" {...props} />}
+          />
+          <Route
+            path="/products/apparel"
+            render={(props) => <ProductPage category="apparel" {...props} />}
+          /> */}
+          {/* <Route
+            path="/apparel"
+            render={(props) => <ApparelPage auth={auth} {...props} />}
+          /> */}
+          <Route path="/product/:id" component={ProductDetail} />
+          <ProtectedRoute path="/profile" component={Profile} />
+        </Switch>
+        {/* </div> */}
+        <Footer />
+      </Router>
+    </Auth0Provider>
   );
 }
 
