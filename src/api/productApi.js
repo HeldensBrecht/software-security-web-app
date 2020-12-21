@@ -39,7 +39,7 @@ export function saveProduct(accessToken, product) {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
-      Accept: "application/json",
+      // Accept: "application/json",
     },
     body: JSON.stringify(product),
   })

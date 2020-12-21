@@ -22,6 +22,7 @@ export default function AdminPanel() {
       .getProducts()
       .then((products) => {
         setProducts(products);
+        //console.log(accessToken);
       })
       .catch((error) => {
         console.log(error);
