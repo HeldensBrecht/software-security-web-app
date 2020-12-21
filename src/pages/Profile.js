@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Profile() {
@@ -20,30 +21,35 @@ export default function Profile() {
       <h3 className="mx-md-3 mb-md-3 font-weight-normal">Profile</h3>
       <div className="mx-md-3">
         {profile ? (
-          <table>
-            <tbody>
-              <tr>
-                <td>First Name</td>
-                <td>{profile.given_name}</td>
-              </tr>
-              <tr>
-                <td>Last Name</td>
-                <td>{profile.family_name}</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>{profile.email}</td>
-              </tr>
-              <tr>
-                <td>Email Verified</td>
-                <td>
-                  {profile.email_verified
-                    ? String.fromCharCode("0x00002714")
-                    : String.fromCharCode("0x00002718")}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <>
+            <table>
+              <tbody>
+                <tr>
+                  <td>First Name</td>
+                  <td>{profile.given_name}</td>
+                </tr>
+                <tr>
+                  <td>Last Name</td>
+                  <td>{profile.family_name}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{profile.email}</td>
+                </tr>
+                <tr>
+                  <td>Email Verified</td>
+                  <td>
+                    {profile.email_verified
+                      ? String.fromCharCode("0x00002714")
+                      : String.fromCharCode("0x00002718")}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="row">
+              <Link to="/admin">Go To AdminPanel</Link>
+            </div>
+          </>
         ) : (
           <h3>Loading...</h3>
         )}

@@ -1,5 +1,11 @@
 export async function handleResponse(response) {
-  if (response.ok) return await response.json();
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (e) {
+      return;
+    }
+  }
   if (response.status === 400) {
     // So, a server-side validation error occurred.
     // Server side validation returns a string error message, so parse as text instead of json.
