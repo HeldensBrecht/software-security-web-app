@@ -1,20 +1,6 @@
+import axios from "axios";
 import { handleResponse, handleError } from "./apiUtils";
 const baseUrl = process.env.REACT_APP_API_URL + "/products/";
-
-// export function getProducts(accessToken) {
-//   console.log(baseUrl);
-//   return fetch(baseUrl, { headers: { Authorization: `Bearer ${accessToken}` } })
-//     .then(handleResponse)
-//     .catch(handleError);
-// }
-
-export function test(accessToken) {
-  return fetch("http://localhost:3001/private", {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
-    .then(handleResponse)
-    .catch(handleError);
-}
 
 export function getProducts(params = []) {
   let queryString = "?";
@@ -25,21 +11,38 @@ export function getProducts(params = []) {
     .then(handleResponse)
     .catch(handleError);
 }
-//
-export async function getProduct(id) {
-  return await fetch(baseUrl + id)
+
+export function getProduct(id) {
+  return fetch(
+    baseUrl + id
+    // , { credentials: "include" }
+  )
     .then(handleResponse)
     .catch(handleError);
 }
 
-export function saveProduct(accessToken, product) {
+export function saveProduct(accessToken, csrfToken, product) {
   console.log(product);
+  // return axios.put(baseUrl + product.id, {
+  //   headers: {
+  //     Authorization: `Bearer ${accessToken}`,
+  //     _csrf: csrfToken,
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  //   withCredentials: true,
+  //   data: JSON.stringify(product),
+  //   xsrfCookieName: "_csrf",
+  //   xsrfHeaderName: "X-XSRF-TOKEN",
+  // });
   return fetch(baseUrl + (product.id || ""), {
     method: product.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
+    credentials: "same-origin",
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      _csrf: csrfToken,
       "Content-Type": "application/json",
-      // Accept: "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify(product),
   })

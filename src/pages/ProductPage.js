@@ -14,8 +14,7 @@ const ProductPage = (props) => {
     productApi
       .getProducts(queryParams)
       .then((products) => {
-        console.log(products);
-        setProducts(products);
+        setProducts(products.data);
       })
       .catch((error) => {
         console.log(error);

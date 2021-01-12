@@ -34,7 +34,7 @@ const ManageProductPage = (props) => {
       productApi
         .getProduct(props.match.params.id)
         .then((product) => {
-          setProduct(product);
+          setProduct(product.data);
         })
         .catch((error) => {
           console.log(error);
@@ -69,10 +69,14 @@ const ManageProductPage = (props) => {
     if (!formIsValid()) return;
     setSaving(true);
     productApi
-      .saveProduct(accessToken, product)
-      .then(() => {
+      .saveProduct(accessToken, product.csrfToken, product)
+      .then((res) => {
         toast.success("Product saved.");
-        props.history.push("/admin");
+        if (props.match.params.id) {
+          props.history.replace("/profile");
+        } else {
+          props.history.replace(`/product/${res.substring(10)}`);
+        }
       })
       .catch((error) => {
         setSaving(false);

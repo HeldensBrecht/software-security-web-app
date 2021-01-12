@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import * as userApi from "../api/userApi";
 import * as productApi from "../api/productApi";
 
 export default function AdminPanel() {
+  const history = useHistory();
   const { getAccessTokenSilently } = useAuth0();
   const [accessToken, setAccessToken] = useState("");
   const [products, setProducts] = useState([]);
@@ -15,20 +17,30 @@ export default function AdminPanel() {
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
       scope: "openid profile email",
     })
-      .then((res) => setAccessToken(res))
-      .catch((err) => console.log(err));
-
-    productApi
-      .getProducts()
-      .then((products) => {
-        setProducts(products);
-        //console.log(accessToken);
+      .then((res) => {
+        setAccessToken(res);
+        userApi
+          .getYourself(res)
+          .then((profile) => {
+            if (profile.data.user.role === 0) {
+              toast.error(`You are not allowed to access this page`);
+              history.push("/profile");
+            } else {
+              productApi
+                .getProducts()
+                .then((products) => {
+                  setProducts(products.data);
+                })
+                .catch((error) => {
+                  console.log(error);
+                  alert(error);
+                });
+            }
+          })
+          .catch((err) => console.log(err));
       })
-      .catch((error) => {
-        console.log(error);
-        alert(error);
-      });
-  }, [getAccessTokenSilently]);
+      .catch((err) => console.log(err));
+  }, [getAccessTokenSilently, history]);
 
   const deleteProduct = (prodId) => {
     setProducts((prevProducts) => prevProducts.filter((p) => p.id !== prodId));
@@ -54,10 +66,6 @@ export default function AdminPanel() {
 
         <div className="col-xs-12 col-sm-12 col-md-8 pr-0">
           <h4 className="font-weight-normal">Products</h4>
-          <Link className="text-decoration-none" to="/admin/product/">
-            Add Product
-          </Link>
-
           <table className="w-100">
             <thead>
               <tr>
@@ -77,13 +85,6 @@ export default function AdminPanel() {
                     <td>&euro;{p.price}</td>
                     <td>{p.stock}</td>
                     <td>
-                      <Link
-                        className="text-decoration-none text-dark"
-                        to={`/admin/product/${p.id}`}
-                      >
-                        Edit
-                      </Link>
-                      {" | "}
                       <button
                         className="bg-danger border border-danger text-white"
                         onClick={() => deleteProduct(p.id)}

@@ -4,6 +4,7 @@ import TextArea from "../common/TextArea";
 import SelectInput from "../common/SelectInput";
 
 export default function ProductForm({
+  // csrfToken,
   product,
   onChange,
   onSave,
@@ -18,6 +19,8 @@ export default function ProductForm({
           {errors.onSave}
         </div>
       )}
+
+      {/* <Input type="hidden" name="_csrf" value={csrfToken} /> */}
 
       <Input
         type="text"
@@ -58,8 +61,6 @@ export default function ProductForm({
         name="category"
         label="Category"
         value={product.category || ""}
-        // defaultOption="Select Category"
-        defaultOption={product.category}
         options={[{ name: "vinyl" }, { name: "apparel" }].map((author) => ({
           value: author.name,
           text: author.name,

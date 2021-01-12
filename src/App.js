@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Homepage from "./pages/Homepage";
+import Callback from "./pages/Callback";
 import ProductPage from "./pages/ProductPage";
 import ProductDetail from "./pages/ProductDetail";
 import AboutPage from "./pages/AboutPage";
@@ -40,16 +41,17 @@ function App(props) {
         {/* <div className="container-fluid"> */}
         <Switch>
           <Route path="/" exact component={Homepage} />
+          <Route path="/callback" component={Callback} />
           <Route path="/about" component={AboutPage} />
           <Route path="/products/:category" component={ProductPage} />
           <Route path="/products" component={ProductPage} />
           <Route path="/product/:id" component={ProductDetail} />
           <ProtectedRoute path="/profile" component={Profile} />
           <ProtectedRoute
-            path="/admin/product/:id"
+            path="/edit/product/:id"
             component={ManageProductPage}
           />
-          <ProtectedRoute path="/admin/product" component={ManageProductPage} />
+          <ProtectedRoute path="/product" component={ManageProductPage} />
           <ProtectedRoute path="/admin" component={AdminPanel} />
         </Switch>
         <ToastContainer autoClose={3000} hideProgressBar />
