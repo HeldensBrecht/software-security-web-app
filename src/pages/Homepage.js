@@ -5,12 +5,13 @@ export default function Homepage() {
   return (
     <>
       <div
-        className="cover-container d-flex h-100 p-3 mx-auto flex-column"
+        className="cover-container"
         style={{
           backgroundImage: "url('/images/bg.jpg')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
+          height: "100vh",
         }}
       ></div>
 

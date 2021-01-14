@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -32,8 +33,12 @@ const Footer = () => {
         <div style={{ width: "35%" }}></div>
         <div className="mr-md-3 w-100">
           <h6>Info</h6>
-          <p className="mb-0">Privacy Statement</p>
-          <p className="mb-0">About</p>
+          <Link to="/privacy" className="mb-0 text-muted">
+            Privacy Statement
+          </Link>
+          <Link to="/about" className="d-block mb-0 text-muted">
+            About
+          </Link>
         </div>
       </div>
       <div

@@ -61,7 +61,7 @@ const Header = (props) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                Profile
+                My Account
               </NavLink>
             </li>
           )}
@@ -75,7 +75,7 @@ const Header = (props) => {
               style={{ backgroundColor: "inherit", border: "inherit" }}
               className="nav-link"
             >
-              {isLoading || isAuthenticated ? "Log Out" : "My Account"}
+              {isLoading || isAuthenticated ? "Log Out" : "Log In"}
             </button>
           </li>
         </ul>
