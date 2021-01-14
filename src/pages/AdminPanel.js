@@ -13,23 +13,20 @@ export default function AdminPanel() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAccessTokenSilently({
-      audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-      scope: "openid profile email",
-    })
+    getAccessTokenSilently()
       .then((res) => {
         setAccessToken(res);
         userApi
           .getYourself(res)
           .then((profile) => {
-            if (profile.data.user.role === 0) {
+            if (profile.user.role === 0) {
               toast.error(`You are not allowed to access this page`);
-              history.push("/profile");
+              history.replace("/profile");
             } else {
               productApi
                 .getProducts()
                 .then((products) => {
-                  setProducts(products.data);
+                  setProducts(products);
                 })
                 .catch((error) => {
                   console.log(error);

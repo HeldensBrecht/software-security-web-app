@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
 import * as productApi from "../api/productApi";
+import * as userApi from "../api/userApi";
 import ProductForm from "./ProductForm";
 
 const ManageProductPage = (props) => {
@@ -27,20 +28,31 @@ const ManageProductPage = (props) => {
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
       scope: "openid profile email",
     })
-      .then((res) => setAccessToken(res))
+      .then((res) => {
+        setAccessToken(res);
+        userApi
+          .getYourself(res)
+          .then((user) => {
+            if (user.role === 1) {
+              toast.error("You are not allowed to enter this page.");
+              props.history.replace("/admin");
+            }
+          })
+          .catch((err) => console.log(err));
+      })
       .catch((err) => console.log(err));
 
     props.match.params.id &&
       productApi
         .getProduct(props.match.params.id)
         .then((product) => {
-          setProduct(product.data);
+          setProduct(product);
         })
         .catch((error) => {
           console.log(error);
           alert(error);
         });
-  }, [props.match.params.id, getAccessTokenSilently]);
+  }, [props.match.params.id, getAccessTokenSilently, props.history]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,7 +81,7 @@ const ManageProductPage = (props) => {
     if (!formIsValid()) return;
     setSaving(true);
     productApi
-      .saveProduct(accessToken, product.csrfToken, product)
+      .saveProduct(accessToken, product)
       .then((res) => {
         toast.success("Product saved.");
         if (props.match.params.id) {

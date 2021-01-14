@@ -19,9 +19,8 @@ export default function Profile() {
         userApi
           .getYourself(res)
           .then((res) => {
-            console.log(res);
-            setProfile(res.data.user);
-            setProducts(res.data.products);
+            setProfile(res.user);
+            setProducts(res.products);
           })
           .catch((err) => console.log(err));
       })
