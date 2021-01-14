@@ -1,18 +1,16 @@
 export async function handleResponse(response) {
-  let toRespond = { status: response.status };
   if (response.ok) {
     if (response.status === 201) {
       return response.headers.get("Location");
     }
     try {
-      toRespond.data = await response.json();
-      return toRespond;
+      return await response.json();
     } catch (e) {
       return;
     }
   }
   if (response.status === 404) {
-    return toRespond;
+    return { status: response.status };
   }
   if (response.status === 400) {
     // So, a server-side validation error occurred.

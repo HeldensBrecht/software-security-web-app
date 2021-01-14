@@ -15,7 +15,7 @@ const Callback = () => {
         userApi
           .getYourself(accessToken)
           .then((res) => {
-            if (res.status === 404) {
+            if (res.status && res.status === 404) {
               userApi
                 .saveUser(accessToken, { username: user.nickname })
                 .then((res) => {

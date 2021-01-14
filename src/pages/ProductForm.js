@@ -4,7 +4,6 @@ import TextArea from "../common/TextArea";
 import SelectInput from "../common/SelectInput";
 
 export default function ProductForm({
-  // csrfToken,
   product,
   onChange,
   onSave,
@@ -19,8 +18,6 @@ export default function ProductForm({
           {errors.onSave}
         </div>
       )}
-
-      {/* <Input type="hidden" name="_csrf" value={csrfToken} /> */}
 
       <Input
         type="text"
