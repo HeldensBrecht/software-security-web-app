@@ -7,25 +7,27 @@ import * as userApi from "../api/userApi";
 import * as productApi from "../api/productApi";
 
 export default function Profile() {
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user, isLoading, getAccessTokenSilently } = useAuth0();
   const [accessToken, setAccessToken] = useState("");
   const [profile, setProfile] = useState(null);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAccessTokenSilently()
-      .then((res) => {
-        setAccessToken(res);
-        userApi
-          .getYourself(res)
-          .then((res) => {
-            setProfile(res.user);
-            setProducts(res.products);
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  }, [getAccessTokenSilently]);
+    if (!isLoading) {
+      getAccessTokenSilently()
+        .then((res) => {
+          setAccessToken(res);
+          userApi
+            .getYourself(res)
+            .then((res) => {
+              setProfile(res.user);
+              setProducts(res.products);
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoading, getAccessTokenSilently]);
 
   const deleteProduct = (prodId) => {
     setProducts((prevProducts) => prevProducts.filter((p) => p.id !== prodId));

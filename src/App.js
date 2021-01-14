@@ -8,6 +8,7 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import Homepage from "./pages/Homepage";
 import Callback from "./pages/Callback";
+import PrivacyStatement from "./pages/PrivacyStatement";
 import ProductPage from "./pages/ProductPage";
 import ProductDetail from "./pages/ProductDetail";
 import AboutPage from "./pages/AboutPage";
@@ -43,6 +44,7 @@ function App(props) {
           <Route path="/" exact component={Homepage} />
           <Route path="/callback" component={Callback} />
           <Route path="/about" component={AboutPage} />
+          <Route path="/privacy" component={PrivacyStatement} />
           <Route path="/products/:category" component={ProductPage} />
           <Route path="/products" component={ProductPage} />
           <Route path="/product/:id" component={ProductDetail} />

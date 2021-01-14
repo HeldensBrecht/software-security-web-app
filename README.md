@@ -4,6 +4,10 @@ Frontend Application for assignment 2 - Software Security
 
 This is a React application regarding products for a music store. This music store only sells vinyl and apparel (merch). The service is publically available at https://www.brechtheldens.xyz
 
+## Privacy Policy and processing register
+
+To be found at https://www.brechtheldens.xyz/privacy
+
 ## Prevention of common web vulnerabilities
 
 ### XSS and XSSI
