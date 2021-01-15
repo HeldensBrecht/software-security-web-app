@@ -43,6 +43,30 @@ export default function Profile(props) {
     });
   };
 
+  const requestAllData = () => {
+    window.confirm(
+      "Are you sure you want to request all your data? This might take some time"
+    ) &&
+      userApi
+        .getAllData(accessToken, profile.id)
+        .then((res) => {
+          let fileURL = window.URL.createObjectURL(
+            new Blob([JSON.stringify(res)], {
+              type: "application/json",
+            })
+          );
+          let tempLink = document.createElement("a");
+          tempLink.href = fileURL;
+          tempLink.setAttribute("download", `${profile.username}.json`);
+          tempLink.click();
+        })
+        .catch((error) => {
+          toast.error(
+            `Could not retrieve your user data: Please contact us at john.doe@example.com to resolve this issue.`
+          );
+        });
+  };
+
   const deleteUser = () => {
     window.confirm("Are you sure you want to delete your user account?") &&
       userApi
@@ -202,7 +226,10 @@ export default function Profile(props) {
       <div className="my-md-1" style={{ height: "1rem" }}></div>
       <h3 className="mx-md-3 mb-md-3 font-weight-normal">Manage Account</h3>
       <div className="mx-md-3">
-        <button className="btn btn-outline-success mr-2">
+        <button
+          onClick={requestAllData}
+          className="btn btn-outline-success mr-2"
+        >
           Request User Data
         </button>
         <button onClick={deleteUser} className="btn btn-danger">
