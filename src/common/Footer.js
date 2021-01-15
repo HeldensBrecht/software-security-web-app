@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer container-fluid text-muted small">
+    <footer className="footer container-fluid text-muted small px-0 px-md-3">
       <div
-        className="d-md-flex flex-md-equal w-100 mt-4 mt-md-5 pt-md-5 pb-3 px-md-3"
+        className="d-flex flex-md-equal w-100 mt-4 mt-md-5 pt-md-5 pb-3 px-3"
         style={{
           border: "1px solid rgba(0, 0, 0, 0.09)",
           borderBottom: "none",
@@ -13,7 +13,7 @@ const Footer = () => {
       >
         <div className="mr-md-3 w-100">
           <h6>Address</h6>
-          <p className="mb-0">Cardijnstraat 12</p>
+          <p className="mb-0">Cardijnstraat 192A</p>
           <p className="mb-0">1980 Eppegem</p>
           <p className="mb-0">Belgium</p>
         </div>
@@ -42,14 +42,14 @@ const Footer = () => {
         </div>
       </div>
       <div
-        className="d-md-flex flex-md-equal w-100 pb-md-4 pt-md-4 px-md-3"
+        className="d-flex flex-md-equal w-100 pb-md-4 pt-md-4 px-3"
         style={{
           borderLeft: "1px solid rgba(0, 0, 0, 0.09)",
           borderRight: "1px solid rgba(0, 0, 0, 0.09)",
         }}
       >
         <p className="mb-0 mr-auto">&copy;2020 - EWJ</p>
-        <div className="ml-auto d-sm-flex">
+        <div className="ml-auto d-flex">
           <p className="mb-0">PayPal</p>
           <p className="mb-0 ml-1">VISA</p>
           <p className="mb-0 ml-1">MasterCard</p>

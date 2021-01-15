@@ -195,6 +195,23 @@ const PrivacyStatement = () => {
         right of EWJ (only accessible when logged in).
       </p>
 
+      <h3 className="font-weight-normal">Data Protection Officer</h3>
+
+      <p className="mb-1">
+        If you want to excercise your rights through a responsible, have a
+        question, or complaint on how EWJ processes your personal data, contact
+        EWJ's data protection officer:
+      </p>
+
+      <ul>
+        <li className="mb-1">
+          <strong>Via E-Mail:</strong> john.doe@ewj.com
+        </li>
+        <li>
+          <strong>By Mail:</strong> Cardijnstraat 456A 1980 Eppegem
+        </li>
+      </ul>
+
       <h3 className="font-weight-normal">Children's Information</h3>
 
       <p className="mb-1">

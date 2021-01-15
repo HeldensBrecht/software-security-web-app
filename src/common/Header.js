@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = (props) => {
+  const [show, setShow] = useState(false);
   const { isLoading, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   //   const activeStyle = { color: "white", backgroundColor: "black" };
+
   return (
     <nav
       className="navbar fixed-top navbar-expand-sm m-md-3 px-md-3 py-md-2 navbar-light bg-white"
@@ -13,7 +15,22 @@ const Header = (props) => {
       <NavLink to="/" exact className="navbar-brand">
         E W J
       </NavLink>
-      <div className="collapse navbar-collapse" id="navbarContent">
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        onClick={() => setShow((s) => !s)}
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div
+        className={`collapse navbar-collapse ${show && "show"}`}
+        id="navbarContent"
+      >
         <ul className="navbar-nav mr-auto">
           {/* <li className="nav-item">
             <NavLink to="/" className="nav-link" activeClassName="not">

@@ -35,3 +35,13 @@ export function deleteUser(accessToken, userId) {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function getAllData(accessToken, userId) {
+  return fetch(`${process.env.REACT_APP_API_URL}/alluserdata/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}
