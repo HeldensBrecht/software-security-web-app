@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import * as productApi from "../api/productApi";
 
+import Loading from "../common/Loading";
+
 const ProductPage = (props) => {
   const [products, setProducts] = useState([]);
   const category = props.match.params.category;
@@ -53,7 +55,7 @@ const ProductPage = (props) => {
             );
           })
         ) : (
-          <h4>Loading...</h4>
+          <Loading />
         )}
       </div>
     </main>

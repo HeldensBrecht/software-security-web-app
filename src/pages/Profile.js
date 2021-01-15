@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Input from "../common/Input";
+import Loading from "../common/Loading";
 
 import * as userApi from "../api/userApi";
 import * as productApi from "../api/productApi";
@@ -91,8 +92,8 @@ export default function Profile(props) {
   return (
     <main className="container-fluid">
       <div className="my-md-5" style={{ height: "5rem" }}></div>
-      <h3 className="mx-md-3 mb-md-3 font-weight-normal">Profile</h3>
       <div className="mx-md-3">
+        <h3 className="mb-md-3 font-weight-normal">Profile</h3>
         {profile ? (
           !showEditForm ? (
             <>
@@ -116,12 +117,11 @@ export default function Profile(props) {
                   </tr>
                 </tbody>
               </table>
-              <button
-                onClick={() => setShowEditForm(true)}
-                className="btn btn-outline-info py-1 mt-2"
-              >
-                Edit
-              </button>
+              {profile.role === 1 && (
+                <Link className="btn btn-info py-1 mt-2" to="/admin">
+                  Go To AdminPanel
+                </Link>
+              )}
             </>
           ) : (
             <div className="col-md-3 px-0">
@@ -151,90 +151,86 @@ export default function Profile(props) {
             </div>
           )
         ) : (
-          <h3>Loading...</h3>
+          <div className="row">
+            <Loading />
+          </div>
         )}
-      </div>
-      {profile && (
-        <>
-          <div className="my-md-1" style={{ height: "1rem" }}></div>
-          {profile.role === 1 ? (
-            <>
-              <h3 className="mx-md-3 mb-md-3 font-weight-normal">Products</h3>
-              <div className="row mx-0">
-                <Link to="/admin">Go To AdminPanel</Link>
-              </div>
-            </>
-          ) : (
-            <>
-              <h3 className="mx-md-3 mb-md-3 font-weight-normal">
-                My Products
-              </h3>
-              <Link className="mx-md-3 text-decoration-none" to="/product">
-                Add Product
-              </Link>
-              {products.length ? (
-                <table className="mx-md-3" style={{ width: "99%" }}>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th>Price</th>
-                      <th>Stock</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {products.map((p) => (
-                      <tr key={p.id}>
-                        <td>{p.name}</td>
-                        <td>{p.description.substring(0, 50)}...</td>
-                        <td>&euro;{p.price}</td>
-                        <td>{p.stock}</td>
-                        <td>
-                          <Link
-                            className="text-decoration-none text-dark"
-                            to={`/edit/product/${p.id}`}
-                          >
-                            Edit
-                          </Link>
-                          {" | "}
-                          <button
-                            className="bg-danger border border-danger text-white"
-                            onClick={() => deleteProduct(p.id)}
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <div className="mx-md-3">
-                  <hr />
-                  <p>
-                    You do not have any products yet. Perhaps you can create
-                    one.
-                  </p>
-                </div>
-              )}
-            </>
-          )}
-        </>
-      )}
 
-      <div className="my-md-1" style={{ height: "1rem" }}></div>
-      <h3 className="mx-md-3 mb-md-3 font-weight-normal">Manage Account</h3>
-      <div className="mx-md-3">
+        {/*  */}
+        <div className="my-md-1" style={{ height: "1rem" }}></div>
+        <h3 className="mb-md-3 font-weight-normal">Manage Account</h3>
+        <button
+          onClick={() => setShowEditForm(true)}
+          className="btn btn-outline-info py-1"
+        >
+          Edit Profile
+        </button>
         <button
           onClick={requestAllData}
-          className="btn btn-outline-success mr-2"
+          className="btn btn-outline-success py-1 mx-2"
         >
           Request User Data
         </button>
-        <button onClick={deleteUser} className="btn btn-danger">
+        <button onClick={deleteUser} className="btn btn-danger py-1">
           Remove Account
         </button>
+        {/*  */}
+
+        {profile && profile.role === 0 && (
+          <>
+            <div className="my-md-1" style={{ height: "1rem" }}></div>
+
+            <h3 className="mb-md-3 font-weight-normal">My Products</h3>
+            <Link className="text-decoration-none" to="/product">
+              Add Product
+            </Link>
+            {products.length ? (
+              <table style={{ width: "99%" }}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((p) => (
+                    <tr key={p.id}>
+                      <td>{p.name}</td>
+                      <td>{p.description.substring(0, 50)}...</td>
+                      <td>&euro;{p.price}</td>
+                      <td>{p.stock}</td>
+                      <td>
+                        <Link
+                          className="text-decoration-none text-dark"
+                          to={`/edit/product/${p.id}`}
+                        >
+                          Edit
+                        </Link>
+                        {" | "}
+                        <button
+                          className="btn btn-danger px-1 py-0"
+                          onClick={() => deleteProduct(p.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <>
+                <hr />
+                <p>
+                  You do not have any products yet. Perhaps you can create one.
+                </p>
+              </>
+            )}
+          </>
+        )}
       </div>
     </main>
   );
