@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import * as userApi from "../api/userApi";
 import * as productApi from "../api/productApi";
 
+import Loading from "../common/Loading";
+
 export default function AdminPanel() {
   const history = useHistory();
   const { getAccessTokenSilently } = useAuth0();
@@ -56,13 +58,10 @@ export default function AdminPanel() {
   return (
     <main className="container-fluid">
       <div className="my-md-5" style={{ height: "5rem" }}></div>
-      <div className="row mx-0">
-        <div className="col-xs-12 col-sm-12 col-md-4 mt-1 mt-md-5 pt-md-5 pl-0">
-          <h3 className="font-weight-normal">Admin Panel</h3>
-        </div>
-
-        <div className="col-xs-12 col-sm-12 col-md-8 pr-0">
-          <h4 className="font-weight-normal">Products</h4>
+      <div className="mx-md-3">
+        <h3 className="font-weight-normal">Admin Panel</h3>
+        <h4 className="font-weight-normal">Products</h4>
+        {products ? (
           <table className="w-100">
             <thead>
               <tr>
@@ -74,35 +73,29 @@ export default function AdminPanel() {
               </tr>
             </thead>
             <tbody>
-              {products ? (
-                products.map((p) => (
-                  <tr key={p.id}>
-                    <td>{p.name}</td>
-                    <td>{p.description.substring(0, 50)}...</td>
-                    <td>&euro;{p.price}</td>
-                    <td>{p.stock}</td>
-                    <td>
-                      <button
-                        className="bg-danger border border-danger text-white"
-                        onClick={() => deleteProduct(p.id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td>Loading...</td>
-                  <td>Loading...</td>
-                  <td>Loading...</td>
-                  <td>Loading...</td>
-                  <td>Loading...</td>
+              {products.map((p) => (
+                <tr key={p.id}>
+                  <td>{p.name}</td>
+                  <td>{p.description.substring(0, 50)}...</td>
+                  <td>&euro;{p.price}</td>
+                  <td>{p.stock}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger px-1 py-0"
+                      onClick={() => deleteProduct(p.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
-        </div>
+        ) : (
+          <div className="row mx-0">
+            <Loading />
+          </div>
+        )}
       </div>
     </main>
   );

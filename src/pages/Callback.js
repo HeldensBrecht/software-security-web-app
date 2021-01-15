@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
 import * as userApi from "../api/userApi";
 
+import Loading from "../common/Loading";
+
 const Callback = (props) => {
+  const [loginError, setLoginError] = useState(undefined);
   const { isLoading, getAccessTokenSilently, user, logout } = useAuth0();
 
   useEffect(() => {
@@ -28,8 +31,9 @@ const Callback = (props) => {
             .catch((error) => console.log(error));
         })
         .catch((err) => {
-          toast.error(err.message);
+          setLoginError(err);
           setTimeout(() => {
+            toast.error(err.message);
             logout();
           }, 5000);
         });
@@ -39,7 +43,13 @@ const Callback = (props) => {
   return (
     <main className="container-fluid">
       <div className="my-md-5" style={{ height: "5rem" }}></div>
-      <h2>One more step...</h2>
+      {loginError ? (
+        <h2>{loginError.message}</h2>
+      ) : (
+        <div className="row">
+          <Loading />
+        </div>
+      )}
     </main>
   );
 };
