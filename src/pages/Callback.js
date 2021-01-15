@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
@@ -9,7 +9,6 @@ const Callback = (props) => {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log(user);
       getAccessTokenSilently()
         .then((accessToken) => {
           userApi
