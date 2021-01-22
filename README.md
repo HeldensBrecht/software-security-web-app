@@ -21,29 +21,28 @@ To be found at https://www.brechtheldens.xyz/privacy
 ### Verwerkingsactiviteiten van reguliere persoonsgegevens:
 
 - Categorie persoonsgegeven(s): Naam, adres, woonplaats
-- Categorie betrokkenen: Leden
+- Categorie betrokkenen: Klanten
 - Grondslag voor de verwerking: Overeenkomst
-- Doel verwerking: Dienstverlening
+- Doel verwerking: Dienstverlening, Verwerking bestellingen
 - Zelf verwerken: Ja
-- Waar bevindt zich de verwerker? Niet van toepassing
-- EU Verwerkingsovereenkomst? Niet van toepassing/Niet nodig
-- Bewaartermijn: Onbekend (Tot gebruiker zijn profiel verwijdert)
-- Veiligheidsmaatregelen: Anonimisering persoonsgegevens
+- Waar bevindt zich de verwerker? Binnen de EU of in een land met voldoende juridische waarborgen
+- EU Verwerkingsovereenkomst? Neen (Niet vereist)
+- Bewaartermijn: Tot gebruiker zijn profiel verwijdert
+- Veiligheidsmaatregelen: Encryptie persoonsgegevens
 
 - Categorie persoonsgegeven(s): E-mailadres/telefoonnummer
-- Categorie betrokkenen: Leden
+- Categorie betrokkenen: Klanten
 - Grondslag voor de verwerking: Overeenkomst
-- Doel verwerking: Dienstverlening
+- Doel verwerking: Dienstverlening, Verwerking bestellingen
 - Zelf verwerken: Ja
-- Waar bevindt zich de verwerker? Niet van toepassing
-- EU Verwerkingsovereenkomst? Niet van toepassing/Niet nodig
-- Bewaartermijn: Onbekend (Tot gebruiker zijn profiel verwijdert)
-- Veiligheidsmaatregelen: Anonimisering persoonsgegevens
+- Waar bevindt zich de verwerker? Binnen de EU of in een land met voldoende juridische waarborgen
+- EU Verwerkingsovereenkomst? Neen (Niet vereist)
+- Bewaartermijn: Tot gebruiker zijn profiel verwijdert
+- Veiligheidsmaatregelen: Encryptie persoonsgegevens
 
 ### Verwerkingsactiviteiten van bijzondere persoonsgegevens: NVT
 
 Datum aanmaken register: 19 januari 2021
-Updates: /
 
 ## Auth0 (Identity Provider)
 
