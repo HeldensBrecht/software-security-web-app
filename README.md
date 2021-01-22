@@ -64,3 +64,7 @@ The header 'X-FRAME-OPTIONS' is automatically set with every incoming request. A
 ### CSRF Mitigation
 
 Auth0 is used as identity provider. Upon login, the accesstoken is kept in memory at all times without setting a cookie.
+
+### Notifications regarding dependency vulnerabilities
+
+GitHub dependabot is enabled on this repo, informing me about any possible vulnerabilities.
