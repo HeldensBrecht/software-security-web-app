@@ -92,7 +92,9 @@ export default function Homepage() {
             <h6 className="card-subtitle mt-1 mt-sm-3 mb-sm-1 text-muted">
               Eppegem Herby's Store
             </h6>
-            <p className="card-text text-muted">Find us at Cardijnstraat 12</p>
+            <p className="card-text text-muted">
+              Find us at Cardijnstraat 192A
+            </p>
           </div>
         </div>
       </main>
